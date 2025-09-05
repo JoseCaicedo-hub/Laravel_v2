@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class UserController extends Controller
         $registros=User::where('name', 'like', '%'.$texto.'%')
             ->orWhere('email','like', '%'.$texto.'%')
             ->orderBy('id','desc')
-            ->paginate(1);
+            ->paginate(10);
             return view('usuario.index', compact('registros','texto'));
     }
 
@@ -26,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuario.action');
     }
 
     /**
@@ -34,7 +35,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $registro=new User();
+        $registro->name=$request->input('name');
+        $registro->email=$request->input('email');
+        $registro->password=bcrypt($request->input('password'));
+        $registro->activo=$request->input('activo');
+
+        $registro->save();
+
+        return redirect()->route('usuarios.index')->with('mensaje', 'registro');
     }
 
     /**

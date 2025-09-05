@@ -6,7 +6,7 @@
                     <h4>Eliminar Registro</h4>
                 </div>
                 <div class="modal-body">
-                    ¿Usted desea eliminar el registro xyz?
+                    ¿Usted desea eliminar el registro ?
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-light">Eliminar</button>
