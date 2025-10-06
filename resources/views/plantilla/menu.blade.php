@@ -23,7 +23,7 @@
                     <a href="{{route('dashboard')}}" class="nav-link" id="menuDashboard">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>
-                            Panel de control
+                            Panel de Control
                         </p>
                     </a>
                 </li>

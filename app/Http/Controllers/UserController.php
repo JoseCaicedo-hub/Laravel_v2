@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\UserRequest; 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,7 +31,6 @@ class UserController extends Controller
     public function create()
     {
         $this->authorize('user-create');
-
         $roles=Role::all();
         return view('usuario.action', compact('roles'));
     }
@@ -68,9 +66,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $this->authorize('user-edit');
-        $registro=User::findOrFail($id);
         $roles=Role::all();
-        return view('usuario.action', compact('registro', 'roles'));
+        $registro=User::findOrFail($id);
+        return view('usuario.action', compact('registro','roles'));
     }
 
     /**
@@ -86,7 +84,7 @@ class UserController extends Controller
         $registro->activo=$request->input('activo');
         $registro->save();
 
-        $registro->syncRoles([$request->input('role')]);
+    
 
         return redirect()->route('usuarios.index')->with('mensaje','Registro '.$registro->name.' actualizado satisfatoriamente. ' );
     }

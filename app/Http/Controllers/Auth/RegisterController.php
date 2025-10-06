@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User; 
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
+
 
 class RegisterController extends Controller
 {
@@ -20,15 +21,15 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => Hash::make ($request->input('password')),
-            'activo' => 1, //activar automaticamente
+            'password' => Hash::make($request->input('password')),
+            'activo' => 1, //activar automaticamente 
         ]);
-        
+
         $clientRole = Role::where('name', 'cliente')->first();
         if($clientRole){
             $user->assignRole($clientRole);
         }
         Auth::login($user);
-        return redirect()->route('dashboard')->with('mensaje', 'Registro exitoso. ¡Bienvenido!'); 
+        return redirect()->route('dashboard')->with('mensaje', 'Registro exitoso. ¡Bienvenido!');
     }
 }
